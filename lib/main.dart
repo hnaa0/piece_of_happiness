@@ -18,8 +18,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Piece of Happiness',
+      theme: ThemeData(fontFamily: "SsurroundAir"),
+      home: const Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "hello",
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                "안녕",
+                style: TextStyle(fontSize: 30),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
