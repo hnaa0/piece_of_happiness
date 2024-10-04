@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "195932230449",
+    "project_id": "piece-of-happiness",
+    "storage_bucket": "piece-of-happiness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195932230449:android:668839df4663211cfbd610",
+        "android_client_info": {
+          "package_name": "com.example.piece_of_happiness"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1C5kIAo2fis-Jba3gHGEC-Q4DoJDGY6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
