@@ -80,6 +80,14 @@ class AuthViewModel extends AsyncNotifier {
       context.go(HomeScreen.routeUrl);
     }
   }
+
+  Future<void> signOut() async {
+    state = await AsyncValue.guard(
+      () async {
+        await _authRepo.signOut();
+      },
+    );
+  }
 }
 
 final authProvider = AsyncNotifierProvider<AuthViewModel, void>(

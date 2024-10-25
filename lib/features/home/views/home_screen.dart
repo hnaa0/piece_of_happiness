@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:piece_of_happiness/constants/colors.dart';
+import 'package:piece_of_happiness/features/home/views/widgets/wavy_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeUrl = "/home";
@@ -8,11 +10,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("home"),
+    return const Scaffold(
+      backgroundColor: Color(
+        ThemeColors.white,
       ),
-      body: const Column(),
+      appBar: WavyAppBar(),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 16,
+        ),
+        child: Column(
+          children: [],
+        ),
+      ),
     );
   }
 }
