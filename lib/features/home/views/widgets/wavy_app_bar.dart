@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:piece_of_happiness/features/settings/views/settings_screen.dart';
+import 'package:piece_of_happiness/features/user/view_models/user_view_model.dart';
 
-class WavyAppBar extends StatelessWidget implements PreferredSizeWidget {
+class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const WavyAppBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userData = ref.watch(userProvider).value;
+
     return ClipPath(
       clipper: WavyClipper(),
       child: Container(
@@ -21,6 +25,7 @@ class WavyAppBar extends StatelessWidget implements PreferredSizeWidget {
           title: Row(
             children: [
               Container(
+                clipBehavior: Clip.hardEdge,
                 width: 62,
                 height: 62,
                 decoration: const BoxDecoration(
@@ -37,11 +42,17 @@ class WavyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ],
                 ),
+                child: userData != null && userData.hasProfileImage
+                    ? Image.network(
+                        "https://firebasestorage.googleapis.com/v0/b/piece-of-happiness.appspot.com/o/profileImage%2F${userData.uid}?alt=media&time=${DateTime.now().toString()}",
+                        fit: BoxFit.cover,
+                      )
+                    : null,
               ),
               const Gap(14),
-              const Text(
-                "username",
-                style: TextStyle(
+              Text(
+                userData != null ? userData.name : "username",
+                style: const TextStyle(
                   fontSize: 16,
                   color: Color(
                     ThemeColors.grey_900,
@@ -53,6 +64,7 @@ class WavyAppBar extends StatelessWidget implements PreferredSizeWidget {
           backgroundColor: Colors.transparent,
           actions: [
             GestureDetector(
+              behavior: HitTestBehavior.translucent,
               onTap: () {
                 GoRouter.of(context).pushNamed(SettingsScreen.routeName);
               },

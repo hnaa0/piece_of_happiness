@@ -5,6 +5,7 @@ import 'package:piece_of_happiness/features/authentication/views/sign_in_screen.
 import 'package:piece_of_happiness/features/authentication/views/sign_up_screen.dart';
 import 'package:piece_of_happiness/features/home/views/home_screen.dart';
 import 'package:piece_of_happiness/features/settings/views/settings_screen.dart';
+import 'package:piece_of_happiness/features/user/views/edit_profile_screen.dart';
 
 final routerProvider = Provider(
   (ref) {
@@ -38,6 +39,11 @@ final routerProvider = Provider(
           path: HomeScreen.routeUrl,
           name: HomeScreen.routeName,
           builder: (context, state) => const HomeScreen(),
+        ),
+        GoRoute(
+          path: EditProfileScreen.routeUrl,
+          name: EditProfileScreen.routeName,
+          builder: (context, state) => const EditProfileScreen(),
         ),
         GoRoute(
           path: SettingsScreen.routeUrl,
