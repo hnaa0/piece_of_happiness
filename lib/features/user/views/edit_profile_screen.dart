@@ -45,9 +45,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   void _profileImageTap() async {
     final pickedImage = await ImagePicker().pickImage(
       source: ImageSource.gallery,
-      imageQuality: 50,
-      maxHeight: 200,
-      maxWidth: 200,
+      imageQuality: 80,
+      maxHeight: 500,
+      maxWidth: 500,
     );
     if (pickedImage != null) {
       setState(() {

@@ -24,30 +24,44 @@ class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
           toolbarHeight: 80,
           title: Row(
             children: [
-              Container(
-                clipBehavior: Clip.hardEdge,
-                width: 62,
-                height: 62,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(
-                    ThemeColors.white,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(
-                        ThemeColors.grey_300,
-                      ),
-                      blurRadius: 2,
+              GestureDetector(
+                onTap: () {
+                  userData != null && userData.hasProfileImage
+                      ? showDialog(
+                          context: context,
+                          builder: (context) {
+                            return imageDialog(
+                                "https://firebasestorage.googleapis.com/v0/b/piece-of-happiness.appspot.com/o/profileImage%2F${userData.uid}?alt=media&time=${DateTime.now().toString()}",
+                                context);
+                          },
+                        )
+                      : null;
+                },
+                child: Container(
+                  clipBehavior: Clip.hardEdge,
+                  width: 62,
+                  height: 62,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(
+                      ThemeColors.white,
                     ),
-                  ],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(
+                          ThemeColors.grey_300,
+                        ),
+                        blurRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: userData != null && userData.hasProfileImage
+                      ? Image.network(
+                          "https://firebasestorage.googleapis.com/v0/b/piece-of-happiness.appspot.com/o/profileImage%2F${userData.uid}?alt=media&time=${DateTime.now().toString()}",
+                          fit: BoxFit.cover,
+                        )
+                      : null,
                 ),
-                child: userData != null && userData.hasProfileImage
-                    ? Image.network(
-                        "https://firebasestorage.googleapis.com/v0/b/piece-of-happiness.appspot.com/o/profileImage%2F${userData.uid}?alt=media&time=${DateTime.now().toString()}",
-                        fit: BoxFit.cover,
-                      )
-                    : null,
               ),
               const Gap(14),
               Text(
@@ -126,4 +140,24 @@ class WavyClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+Widget imageDialog(path, context) {
+  return Dialog(
+    clipBehavior: Clip.hardEdge,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Container(
+      width: MediaQuery.of(context).size.width * 0.6,
+      height: MediaQuery.of(context).size.width * 0.6,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+      ),
+      child: Image.network(
+        path,
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
 }
