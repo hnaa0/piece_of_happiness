@@ -6,8 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:intl/intl.dart';
+import 'package:piece_of_happiness/features/home/view_models/upload_piece_view_model.dart';
 import 'package:piece_of_happiness/features/settings/view_models/theme_config_view_model.dart';
 
 class AddBottomsheetScreen extends ConsumerStatefulWidget {
@@ -41,6 +43,24 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
     setState(() {
       _file = File("");
     });
+  }
+
+  void _onSaveTap() {
+    ref
+        .read(uploadPieceProvider.notifier)
+        .uploadPiece(
+          image: _file,
+          text: _text,
+          context: context,
+        )
+        .then(
+      (_) {
+        setState(() {
+          _textController.clear();
+          _file = File("");
+        });
+      },
+    );
   }
 
   @override
@@ -337,60 +357,70 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
                   ? MediaQuery.of(context).viewInsets.bottom
                   : 0,
             ),
-            child: BottomAppBar(
-              color: isDark
-                  ? const Color(
-                      ThemeColors.grey_900,
-                    )
-                  : const Color(
-                      ThemeColors.grey_100,
-                    ),
-              child: AnimatedContainer(
-                duration: const Duration(
-                  milliseconds: 150,
-                ),
-                alignment: Alignment.center,
-                width: size.width,
-                decoration: BoxDecoration(
-                  color: _text.isNotEmpty
-                      ? const Color(ThemeColors.blue)
-                      : isDark
-                          ? const Color(
-                              ThemeColors.grey_600,
-                            )
-                          : const Color(
-                              ThemeColors.grey_300,
-                            ),
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: isDark
-                        ? const Color(
-                            ThemeColors.lightBlue,
-                          )
-                        : const Color(
-                            ThemeColors.white,
-                          ),
+            child: GestureDetector(
+              onTap:
+                  ref.read(uploadPieceProvider).isLoading ? null : _onSaveTap,
+              child: BottomAppBar(
+                color: isDark
+                    ? const Color(
+                        ThemeColors.grey_900,
+                      )
+                    : const Color(
+                        ThemeColors.grey_100,
+                      ),
+                child: AnimatedContainer(
+                  duration: const Duration(
+                    milliseconds: 150,
                   ),
-                  boxShadow: [
-                    BoxShadow(
+                  alignment: Alignment.center,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    color: _text.isNotEmpty
+                        ? const Color(ThemeColors.blue)
+                        : isDark
+                            ? const Color(
+                                ThemeColors.grey_600,
+                              )
+                            : const Color(
+                                ThemeColors.grey_300,
+                              ),
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(
                       color: isDark
                           ? const Color(
                               ThemeColors.lightBlue,
                             )
                           : const Color(
-                              ThemeColors.grey_300,
+                              ThemeColors.white,
                             ),
-                      blurRadius: 5,
                     ),
-                  ],
-                ),
-                child: const Text(
-                  "저장",
-                  style: TextStyle(
-                    color: Color(
-                      ThemeColors.white,
-                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: isDark
+                            ? const Color(
+                                ThemeColors.lightBlue,
+                              )
+                            : const Color(
+                                ThemeColors.grey_300,
+                              ),
+                        blurRadius: 5,
+                      ),
+                    ],
                   ),
+                  child: ref.watch(uploadPieceProvider).isLoading
+                      ? LoadingAnimationWidget.twistingDots(
+                          leftDotColor: const Color(ThemeColors.lightBlue),
+                          rightDotColor: const Color(ThemeColors.white),
+                          size: 20,
+                        )
+                      : const Text(
+                          "저장",
+                          style: TextStyle(
+                            color: Color(
+                              ThemeColors.white,
+                            ),
+                          ),
+                        ),
                 ),
               ),
             ),
