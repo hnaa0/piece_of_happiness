@@ -8,7 +8,9 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:piece_of_happiness/features/settings/view_models/theme_config_view_model.dart';
+import 'package:piece_of_happiness/features/user/models/profile_field_type.dart';
 import 'package:piece_of_happiness/features/user/view_models/user_view_model.dart';
+import 'package:piece_of_happiness/features/user/views/widgets/profile_field_tag.dart';
 import 'package:piece_of_happiness/features/user/views/widgets/user_avatar.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
@@ -203,7 +205,19 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                           ),
                           BlendMode.srcIn,
                         )
-                      : null,
+                      : isDark
+                          ? const ColorFilter.mode(
+                              Color(
+                                ThemeColors.white,
+                              ),
+                              BlendMode.srcIn,
+                            )
+                          : const ColorFilter.mode(
+                              Color(
+                                ThemeColors.black,
+                              ),
+                              BlendMode.srcIn,
+                            ),
                 ),
               ),
             ),
@@ -267,25 +281,32 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 4,
-                            horizontal: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(
-                              ThemeColors.lightBlue,
+                        const ProfileFieldTag(
+                          type: ProfileFieldType.email,
+                        ),
+                        const Gap(4),
+                        TextFormField(
+                          readOnly: true,
+                          initialValue: userRef.value!.email,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color(
+                              ThemeColors.grey_700,
                             ),
-                            borderRadius: BorderRadius.circular(20),
                           ),
-                          child: const Text(
-                            "이름",
-                            style: TextStyle(
-                                fontSize: 10,
-                                color: Color(
-                                  ThemeColors.grey_800,
-                                )),
+                          decoration: const InputDecoration(
+                            isDense: true,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
                           ),
+                        ),
+                        const Gap(16),
+                        const ProfileFieldTag(
+                          type: ProfileFieldType.name,
                         ),
                         const Gap(4),
                         TextFormField(

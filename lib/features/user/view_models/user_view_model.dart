@@ -69,12 +69,17 @@ class UserViewModel extends AsyncNotifier<UserModel> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
       () async {
+        final Map<String, dynamic> data = {
+          "name": name,
+        };
+
+        if (file.path.isNotEmpty) {
+          data["hasProfileImage"] = true;
+        }
+
         await _userRepo.updateProfile(
           uid: _authRepo.user!.uid,
-          data: {
-            "name": name,
-            "hasProfileImage": true,
-          },
+          data: data,
           file: file,
         );
 
@@ -87,11 +92,16 @@ class UserViewModel extends AsyncNotifier<UserModel> {
 
     if (state.hasError) {
       if (!context.mounted) return;
+      final errorMessage = (state.error is FirebaseException)
+          ? (state.error as FirebaseException).message
+          : "프로필을 수정할 수 없습니다. 잠시 후 다시 시도해 주세요.";
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            (state.error as FirebaseException).message ??
-                "프로필을 수정할 수 없습니다. 잠시 후 다시 시도해 주세요.",
+            errorMessage ?? "프로필을 수정할 수 없습니다. 잠시 후 다시 시도해 주세요.",
+            style: const TextStyle(
+              fontSize: 12,
+            ),
           ),
         ),
       );

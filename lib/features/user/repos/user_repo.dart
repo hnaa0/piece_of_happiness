@@ -24,8 +24,10 @@ class UserRepo {
     required Map<String, dynamic> data,
     required File file,
   }) async {
-    final fileRef = _storage.ref().child("profileImage/$uid");
-    await fileRef.putFile(file);
+    if (file.path.isNotEmpty) {
+      final fileRef = _storage.ref().child("profileImage/$uid");
+      await fileRef.putFile(file);
+    }
     await _firestore.collection("users").doc(uid).update(data);
   }
 }

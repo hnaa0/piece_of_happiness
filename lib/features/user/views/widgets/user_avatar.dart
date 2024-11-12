@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:piece_of_happiness/features/user/models/user_model.dart';
 
@@ -43,6 +44,19 @@ class UserAvatar extends StatelessWidget {
                 ? Image.network(
                     "https://firebasestorage.googleapis.com/v0/b/piece-of-happiness.appspot.com/o/profileImage%2F${data.uid}?alt=media&time=${DateTime.now().toString()}",
                     fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: LoadingAnimationWidget.twistingDots(
+                          leftDotColor: const Color(ThemeColors.lightBlue),
+                          rightDotColor: const Color(ThemeColors.blue),
+                          size: 20,
+                        ),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container();
+                    },
                   )
                 : null,
       ),
