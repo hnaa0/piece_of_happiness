@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
-import 'package:piece_of_happiness/features/home/models/piece_model.dart';
 import 'package:piece_of_happiness/features/home/view_models/fetch_piece_view_model.dart';
 import 'package:piece_of_happiness/features/home/views/add_bottomsheet_screen.dart';
 import 'package:piece_of_happiness/features/home/views/widgets/home_button.dart';
