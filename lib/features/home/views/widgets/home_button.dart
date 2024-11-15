@@ -44,7 +44,7 @@ class HomeButton extends ConsumerWidget {
       ),
       child: Padding(
         padding: EdgeInsets.all(
-          size.width * 0.065,
+          size.width * 0.07,
         ),
         child: icon,
       ),

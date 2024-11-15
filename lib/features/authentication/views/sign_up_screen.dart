@@ -8,8 +8,8 @@ import 'package:piece_of_happiness/features/authentication/models/screen_type.da
 import 'package:piece_of_happiness/features/authentication/view_models/auth_view_model.dart';
 import 'package:piece_of_happiness/features/authentication/views/widgets/auth_bottom_app_bar.dart';
 import 'package:piece_of_happiness/features/authentication/views/widgets/auth_button.dart';
-import 'package:piece_of_happiness/features/authentication/views/widgets/rounded_stick.dart';
-import 'package:piece_of_happiness/features/authentication/views/widgets/rounded_triangle.dart';
+import 'package:piece_of_happiness/common/widgets/rounded_stick.dart';
+import 'package:piece_of_happiness/common/widgets/rounded_triangle.dart';
 import 'package:piece_of_happiness/features/authentication/views/widgets/sign_up_text_field.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {

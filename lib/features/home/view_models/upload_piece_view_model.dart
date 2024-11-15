@@ -28,7 +28,7 @@ class UploadPieceViewModel extends AsyncNotifier<void> {
 
     state = await AsyncValue.guard(
       () async {
-        if (imageUrl.isNotEmpty) {
+        if (image.path.isNotEmpty) {
           final task =
               await _pieceRepo.uploadImageFile(image: image, uid: user.uid);
           imageUrl = await task.ref.getDownloadURL();
