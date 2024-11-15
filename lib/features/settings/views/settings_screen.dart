@@ -52,7 +52,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         title: Text(
           "설정",
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 14,
             color: Color(
               isDark ? ThemeColors.white : ThemeColors.black,
             ),
@@ -85,7 +85,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(
               "행복조각",
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 12,
                 color: Color(
                   isDark ? ThemeColors.white : ThemeColors.black,
                 ),
@@ -113,7 +113,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(
               "프로필 수정",
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 12,
                 color: Color(
                   isDark ? ThemeColors.white : ThemeColors.black,
                 ),
@@ -138,7 +138,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(
               "다크모드",
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 12,
                 color: Color(
                   isDark ? ThemeColors.white : ThemeColors.black,
                 ),
@@ -174,7 +174,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: const Text(
               "로그아웃",
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 12,
                 color: Colors.redAccent,
               ),
             ),

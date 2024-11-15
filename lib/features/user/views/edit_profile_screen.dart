@@ -174,7 +174,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           title: Text(
             "프로필 수정",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               color: Color(
                 isDark ? ThemeColors.white : ThemeColors.black,
               ),
