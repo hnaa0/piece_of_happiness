@@ -46,9 +46,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   void _profileImageTap() async {
     final pickedImage = await ImagePicker().pickImage(
       source: ImageSource.gallery,
-      imageQuality: 80,
-      maxHeight: 500,
-      maxWidth: 500,
+      imageQuality: 90,
+      maxHeight: 800,
+      maxWidth: 800,
     );
     if (pickedImage != null) {
       setState(() {
@@ -288,11 +288,15 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         TextFormField(
                           readOnly: true,
                           initialValue: userRef.value!.email,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: Color(
-                              ThemeColors.grey_700,
-                            ),
+                            color: isDark
+                                ? const Color(
+                                    ThemeColors.grey_400,
+                                  )
+                                : const Color(
+                                    ThemeColors.grey_700,
+                                  ),
                           ),
                           decoration: const InputDecoration(
                             isDense: true,
@@ -311,8 +315,15 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         const Gap(4),
                         TextFormField(
                           controller: _nameController,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
+                            color: isDark
+                                ? const Color(
+                                    ThemeColors.white,
+                                  )
+                                : const Color(
+                                    ThemeColors.black,
+                                  ),
                           ),
                           decoration: const InputDecoration(
                             isDense: true,

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:piece_of_happiness/features/settings/views/settings_screen.dart';
 import 'package:piece_of_happiness/features/user/view_models/user_view_model.dart';
@@ -31,23 +30,34 @@ class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
                       ? showDialog(
                           context: context,
                           builder: (context) {
-                            return imageDialog(
+                            return Dialog(
+                              clipBehavior: Clip.hardEdge,
+                              elevation: 0,
+                              backgroundColor: const Color(
+                                ThemeColors.white,
+                              ),
+                              child: Image.network(
                                 "https://firebasestorage.googleapis.com/v0/b/piece-of-happiness.appspot.com/o/profileImage%2F${userData.uid}?alt=media&time=${DateTime.now().toString()}",
-                                context);
+                              ),
+                            );
                           },
                         )
                       : null;
                 },
                 child: Container(
-                  clipBehavior: Clip.hardEdge,
                   width: 62,
                   height: 62,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Color(
+                    color: const Color(
                       ThemeColors.white,
                     ),
-                    boxShadow: [
+                    border: Border.all(
+                      color: const Color(
+                        ThemeColors.white,
+                      ),
+                    ),
+                    boxShadow: const [
                       BoxShadow(
                         color: Color(
                           ThemeColors.grey_300,
@@ -57,23 +67,12 @@ class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     ],
                   ),
                   child: userData != null && userData.hasProfileImage
-                      ? Image.network(
-                          "https://firebasestorage.googleapis.com/v0/b/piece-of-happiness.appspot.com/o/profileImage%2F${userData.uid}?alt=media&time=${DateTime.now().toString()}",
-                          fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: LoadingAnimationWidget.twistingDots(
-                                leftDotColor:
-                                    const Color(ThemeColors.lightBlue),
-                                rightDotColor: const Color(ThemeColors.blue),
-                                size: 20,
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container();
-                          },
+                      ? CircleAvatar(
+                          backgroundColor: const Color(
+                            ThemeColors.white,
+                          ),
+                          backgroundImage: NetworkImage(
+                              "https://firebasestorage.googleapis.com/v0/b/piece-of-happiness.appspot.com/o/profileImage%2F${userData.uid}?alt=media&time=${DateTime.now().toString()}"),
                         )
                       : null,
                 ),
@@ -82,7 +81,7 @@ class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
               Text(
                 userData != null ? userData.name : "username",
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Color(
                     ThemeColors.grey_900,
                   ),
