@@ -5,11 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:piece_of_happiness/features/home/view_models/upload_piece_view_model.dart';
+import 'package:piece_of_happiness/features/home/views/widgets/piece_figure.dart';
 import 'package:piece_of_happiness/features/settings/view_models/theme_config_view_model.dart';
 
 class AddBottomsheetScreen extends ConsumerStatefulWidget {
@@ -66,7 +66,6 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
   @override
   void initState() {
     super.initState();
-    initializeDateFormatting('ko_KR', null);
     _textController.addListener(
       () {
         setState(() {
@@ -111,19 +110,7 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
                   ),
             automaticallyImplyLeading: false,
             centerTitle: true,
-            title: Text(
-              "조각 더하기",
-              style: TextStyle(
-                fontSize: 16,
-                color: isDark
-                    ? const Color(
-                        ThemeColors.white,
-                      )
-                    : const Color(
-                        ThemeColors.black,
-                      ),
-              ),
-            ),
+            title: const PieceFigure(),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(
@@ -148,7 +135,7 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
                     child: const Text(
                       "날짜",
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 10,
                         color: Color(
                           ThemeColors.white,
                         ),
@@ -184,7 +171,7 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
                     child: const Text(
                       "사진",
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 10,
                         color: Color(
                           ThemeColors.white,
                         ),
@@ -198,7 +185,7 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
                       alignment: _file.path.isNotEmpty
                           ? Alignment.topRight
                           : Alignment.center,
-                      height: 200,
+                      height: size.width * 0.65,
                       width: size.width,
                       decoration: BoxDecoration(
                         color: isDark
@@ -274,7 +261,7 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
                     child: const Text(
                       "내용",
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 10,
                         color: Color(
                           ThemeColors.white,
                         ),
@@ -288,7 +275,7 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
                     cursorColor: const Color(
                       ThemeColors.blue,
                     ),
-                    maxLines: 5,
+                    maxLines: 7,
                     maxLength: 200,
                     style: TextStyle(
                       fontSize: 14,

@@ -18,6 +18,7 @@ class PieceFigure extends StatelessWidget {
           height: size.width * 0.12,
         ),
         Positioned(
+          top: 10,
           left: 5,
           child: Transform.rotate(
             angle: math.pi / 4,
@@ -33,7 +34,7 @@ class PieceFigure extends StatelessWidget {
         ),
         Positioned(
           right: 5,
-          bottom: 20,
+          bottom: 10,
           child: Transform.rotate(
             angle: math.pi / 12,
             child: CustomPaint(

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
@@ -25,9 +24,6 @@ class PieceDialog extends ConsumerStatefulWidget {
 class _PieceDialogState extends ConsumerState<PieceDialog> {
   Future<void> _onDeleteTap(String id, String imagePath) async {
     context.pop();
-    await Future.delayed(const Duration(
-      milliseconds: 300,
-    ));
     Navigator.pop(context);
     ref.read(fetchPieceProvider.notifier).deletePiece(id, imagePath);
   }
@@ -35,7 +31,6 @@ class _PieceDialogState extends ConsumerState<PieceDialog> {
   @override
   void initState() {
     super.initState();
-    initializeDateFormatting('ko_KR', null);
   }
 
   @override
@@ -65,9 +60,9 @@ class _PieceDialogState extends ConsumerState<PieceDialog> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Gap(size.width * 0.05),
+              Gap(size.width * 0.02),
               const PieceFigure(),
-              Gap(size.width * 0.05),
+              Gap(size.width * 0.02),
               pieceValue.when(
                 data: (pieces) {
                   if (pieces.isEmpty) {

@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:piece_of_happiness/features/home/view_models/fetch_piece_view_model.dart';
 import 'package:piece_of_happiness/features/home/views/add_bottomsheet_screen.dart';
 import 'package:piece_of_happiness/features/home/views/widgets/home_button.dart';
 import 'package:piece_of_happiness/features/home/views/widgets/loading_move.dart';
 import 'package:piece_of_happiness/features/home/views/widgets/piece_dialog.dart';
-import 'package:piece_of_happiness/features/home/views/widgets/pieces_info.dart';
+import 'package:piece_of_happiness/features/home/views/widgets/piece_empty.dart';
+import 'package:piece_of_happiness/features/home/views/widgets/piece_not_empty.dart';
 import 'package:piece_of_happiness/features/home/views/widgets/wavy_app_bar.dart';
 import 'package:piece_of_happiness/features/settings/view_models/theme_config_view_model.dart';
 
@@ -110,9 +112,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               width: size.width,
             ),
           ),
-          const Align(
-            child: PiecesInfo(),
-          ),
+          ref.watch(fetchPieceProvider).when(
+                data: (data) {
+                  final dataLength = data.length;
+
+                  return data.isEmpty
+                      ? const PieceEmpty()
+                      : PieceNotEmpty(dataLength: dataLength);
+                },
+                error: (error, stackTrace) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "데이터를 가져오지 못했습니다.",
+                        style: TextStyle(
+                          color: Color(
+                            ThemeColors.grey_700,
+                          ),
+                        ),
+                      ),
+                      const Text(
+                        "잠시 후 다시 시도해주세요.",
+                        style: TextStyle(
+                          color: Color(
+                            ThemeColors.grey_700,
+                          ),
+                        ),
+                      ),
+                      Gap(MediaQuery.of(context).size.height * 0.2),
+                    ],
+                  );
+                },
+                loading: () => LoadingAnimationWidget.twistingDots(
+                  leftDotColor: const Color(ThemeColors.lightBlue),
+                  rightDotColor: const Color(ThemeColors.blue),
+                  size: 20,
+                ),
+              ),
           Positioned(
             bottom: 0,
             right: 0,
