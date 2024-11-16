@@ -12,9 +12,11 @@ class PieceNotEmpty extends ConsumerStatefulWidget {
   const PieceNotEmpty({
     super.key,
     required this.dataLength,
+    required this.pieceKey,
   });
 
   final int dataLength;
+  final GlobalKey pieceKey;
 
   @override
   ConsumerState<PieceNotEmpty> createState() => _PieceNotEmptyState();
@@ -99,6 +101,7 @@ class _PieceNotEmptyState extends ConsumerState<PieceNotEmpty>
             child: Align(
               alignment: Alignment.center,
               child: Stack(
+                key: widget.pieceKey,
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,

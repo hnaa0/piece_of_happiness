@@ -9,7 +9,12 @@ import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:piece_of_happiness/features/settings/view_models/theme_config_view_model.dart';
 
 class PieceEmpty extends ConsumerWidget {
-  const PieceEmpty({super.key});
+  const PieceEmpty({
+    super.key,
+    required this.pieceKey,
+  });
+
+  final GlobalKey pieceKey;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -63,6 +68,7 @@ class PieceEmpty extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Stack(
+                      key: pieceKey,
                       children: [
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.15,

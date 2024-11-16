@@ -8,7 +8,14 @@ import 'package:piece_of_happiness/features/settings/views/settings_screen.dart'
 import 'package:piece_of_happiness/features/user/view_models/user_view_model.dart';
 
 class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const WavyAppBar({super.key});
+  const WavyAppBar({
+    super.key,
+    required this.profileKey,
+    required this.settingsKey,
+  });
+
+  final GlobalKey profileKey;
+  final GlobalKey settingsKey;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,6 +30,8 @@ class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
         child: AppBar(
           toolbarHeight: 80,
           title: Row(
+            mainAxisSize: MainAxisSize.min,
+            key: profileKey,
             children: [
               GestureDetector(
                 onTap: () {
@@ -104,6 +113,7 @@ class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 height: 80,
                 alignment: Alignment.topCenter,
                 child: SvgPicture.asset(
+                  key: settingsKey,
                   "assets/icons/admin-alt.svg",
                   width: 26,
                   height: 26,

@@ -11,8 +11,10 @@ import 'package:piece_of_happiness/features/home/views/widgets/loading_move.dart
 import 'package:piece_of_happiness/features/home/views/widgets/piece_dialog.dart';
 import 'package:piece_of_happiness/features/home/views/widgets/piece_empty.dart';
 import 'package:piece_of_happiness/features/home/views/widgets/piece_not_empty.dart';
+import 'package:piece_of_happiness/features/home/views/widgets/tutorial_targets.dart';
 import 'package:piece_of_happiness/features/home/views/widgets/wavy_app_bar.dart';
 import 'package:piece_of_happiness/features/settings/view_models/theme_config_view_model.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   static const routeUrl = "/home";
@@ -25,6 +27,13 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final GlobalKey _profileKey = GlobalKey();
+  final GlobalKey _settingsKey = GlobalKey();
+  final GlobalKey _pieceKey = GlobalKey();
+  final GlobalKey _addKey = GlobalKey();
+  final GlobalKey _pickKey = GlobalKey();
+  final GlobalKey _lightbulbKey = GlobalKey();
+
   void _onAddTap(bool isDark) {
     showModalBottomSheet(
       isScrollControlled: true,
@@ -94,6 +103,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
+  TutorialCoachMark _onLightbulbTap(bool isDark) {
+    return TutorialCoachMark(
+      colorShadow: isDark
+          ? const Color(
+              ThemeColors.black,
+            )
+          : const Color(
+              ThemeColors.grey_900,
+            ),
+      opacityShadow: isDark ? 0.6 : 0.8,
+      targets: tutorialTargets(
+        context: context,
+        profileKey: _profileKey,
+        settingsKey: _settingsKey,
+        pieceKey: _pieceKey,
+        addKey: _addKey,
+        pickKey: _pickKey,
+        lightbulbKey: _lightbulbKey,
+      ),
+    )..show(context: context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = ref.watch(themeConfigProvider).darkMode;
@@ -103,7 +134,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       backgroundColor: Color(
         isDark ? ThemeColors.grey_900 : ThemeColors.white,
       ),
-      appBar: const WavyAppBar(),
+      appBar: WavyAppBar(
+        profileKey: _profileKey,
+        settingsKey: _settingsKey,
+      ),
       body: Stack(
         children: [
           Positioned.fill(
@@ -117,8 +151,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   final dataLength = data.length;
 
                   return data.isEmpty
-                      ? const PieceEmpty()
-                      : PieceNotEmpty(dataLength: dataLength);
+                      ? PieceEmpty(pieceKey: _pieceKey)
+                      : PieceNotEmpty(
+                          dataLength: dataLength, pieceKey: _pieceKey);
                 },
                 error: (error, stackTrace) {
                   return Column(
@@ -152,56 +187,97 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
           Positioned(
-            bottom: 0,
-            right: 0,
-            child: Padding(
-              padding: EdgeInsets.only(
-                right: size.width * 0.05,
-                bottom: size.width * 0.08,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () => _onAddTap(isDark),
-                    child: HomeButton(
-                      icon: SvgPicture.asset(
-                        "assets/icons/add.svg",
-                        colorFilter: ColorFilter.mode(
-                          isDark
-                              ? const Color(
-                                  ThemeColors.lightBlue,
-                                )
-                              : const Color(
-                                  ThemeColors.grey_800,
-                                ),
-                          BlendMode.srcIn,
-                        ),
+            right: size.width * 0.05,
+            bottom: size.width * 0.08,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  key: _addKey,
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () => _onAddTap(isDark),
+                  child: HomeButton(
+                    icon: SvgPicture.asset(
+                      "assets/icons/add.svg",
+                      colorFilter: ColorFilter.mode(
+                        isDark
+                            ? const Color(
+                                ThemeColors.lightBlue,
+                              )
+                            : const Color(
+                                ThemeColors.grey_800,
+                              ),
+                        BlendMode.srcIn,
                       ),
                     ),
                   ),
-                  Gap(size.width * 0.05),
-                  GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: _onPickTap,
-                    child: HomeButton(
-                      icon: SvgPicture.asset(
-                        "assets/icons/picking.svg",
-                        colorFilter: ColorFilter.mode(
-                          isDark
-                              ? const Color(
-                                  ThemeColors.lightBlue,
-                                )
-                              : const Color(
-                                  ThemeColors.grey_800,
-                                ),
-                          BlendMode.srcIn,
-                        ),
+                ),
+                Gap(size.width * 0.05),
+                GestureDetector(
+                  key: _pickKey,
+                  behavior: HitTestBehavior.translucent,
+                  onTap: _onPickTap,
+                  child: HomeButton(
+                    icon: SvgPicture.asset(
+                      "assets/icons/picking.svg",
+                      colorFilter: ColorFilter.mode(
+                        isDark
+                            ? const Color(
+                                ThemeColors.lightBlue,
+                              )
+                            : const Color(
+                                ThemeColors.grey_800,
+                              ),
+                        BlendMode.srcIn,
                       ),
                     ),
                   ),
-                ],
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            left: size.width * 0.05,
+            bottom: size.width * 0.08,
+            child: GestureDetector(
+              key: _lightbulbKey,
+              onTap: () => _onLightbulbTap(isDark),
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                width: size.width * 0.1,
+                height: size.width * 0.1,
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? const Color(
+                          ThemeColors.grey_900,
+                        )
+                      : const Color(
+                          ThemeColors.white,
+                        ),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: isDark
+                        ? const Color(
+                            ThemeColors.lightBlue,
+                          )
+                        : const Color(
+                            ThemeColors.grey_300,
+                          ),
+                  ),
+                ),
+                child: SvgPicture.asset(
+                  "assets/icons/lightbulb-question.svg",
+                  colorFilter: ColorFilter.mode(
+                    isDark
+                        ? const Color(
+                            ThemeColors.lightBlue,
+                          )
+                        : const Color(
+                            ThemeColors.black,
+                          ),
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
           ),
