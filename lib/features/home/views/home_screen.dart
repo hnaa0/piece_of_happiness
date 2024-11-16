@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:piece_of_happiness/features/home/view_models/fetch_piece_view_model.dart';
@@ -123,6 +124,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         lightbulbKey: _lightbulbKey,
       ),
     )..show(context: context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting('ko_KR', null);
   }
 
   @override

@@ -54,8 +54,17 @@ class PieceEmpty extends ConsumerWidget {
                 ),
                 const Gap(8),
                 Text(
-                  DateFormat("yyyy년 MM월 dd일").format(
+                  DateFormat("yyyy년 MM월 dd일 EEEE", "ko_KR").format(
                     DateTime.now(),
+                  ),
+                  style: TextStyle(
+                    color: isDark
+                        ? const Color(
+                            ThemeColors.white,
+                          )
+                        : const Color(
+                            ThemeColors.black,
+                          ),
                   ),
                 ),
               ],

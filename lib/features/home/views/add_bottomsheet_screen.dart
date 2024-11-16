@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:piece_of_happiness/constants/colors.dart';
 import 'package:intl/intl.dart';
@@ -66,6 +67,7 @@ class _AddBottomsheetState extends ConsumerState<AddBottomsheetScreen> {
   @override
   void initState() {
     super.initState();
+    initializeDateFormatting('ko_KR', null);
     _textController.addListener(
       () {
         setState(() {
