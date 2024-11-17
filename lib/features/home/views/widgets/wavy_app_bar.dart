@@ -87,12 +87,18 @@ class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
                 ),
               ),
               const Gap(14),
-              Text(
-                userData != null ? userData.name : "username",
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Color(
-                    ThemeColors.grey_900,
+              Container(
+                constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.3),
+                child: Text(
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  userData != null ? userData.name : "username",
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Color(
+                      ThemeColors.grey_900,
+                    ),
                   ),
                 ),
               ),
@@ -110,13 +116,13 @@ class WavyAppBar extends ConsumerWidget implements PreferredSizeWidget {
                   vertical: 14,
                   horizontal: 14,
                 ),
-                height: 80,
+                height: 70,
                 alignment: Alignment.topCenter,
                 child: SvgPicture.asset(
                   key: settingsKey,
                   "assets/icons/admin-alt.svg",
-                  width: 26,
-                  height: 26,
+                  width: 20,
+                  height: 20,
                 ),
               ),
             ),

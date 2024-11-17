@@ -314,6 +314,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         ),
                         const Gap(4),
                         TextFormField(
+                          maxLength: 15,
                           controller: _nameController,
                           style: TextStyle(
                             fontSize: 14,

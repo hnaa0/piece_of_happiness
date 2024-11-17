@@ -33,6 +33,7 @@ class SignUpTextField extends StatelessWidget {
     }
 
     return TextFormField(
+      maxLength: type == FieldType.name ? 15 : null,
       controller: controller,
       obscureText: type == FieldType.password ? true : false,
       autocorrect: false,
