@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:piece_of_happiness/features/authentication/repos/auth_repo.dart';
@@ -38,17 +39,68 @@ final routerProvider = Provider(
         GoRoute(
           path: HomeScreen.routeUrl,
           name: HomeScreen.routeName,
-          builder: (context, state) => const HomeScreen(),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const HomeScreen(),
+            transitionDuration: const Duration(
+              milliseconds: 250,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              final opacity = Tween(
+                begin: 0.0,
+                end: 1.0,
+              ).animate(animation);
+
+              return FadeTransition(
+                opacity: opacity,
+                child: child,
+              );
+            },
+          ),
         ),
         GoRoute(
           path: EditProfileScreen.routeUrl,
           name: EditProfileScreen.routeName,
-          builder: (context, state) => const EditProfileScreen(),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const EditProfileScreen(),
+            transitionDuration: const Duration(
+              milliseconds: 250,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              final position = Tween(
+                begin: const Offset(1, 0),
+                end: Offset.zero,
+              ).animate(animation);
+
+              return SlideTransition(
+                position: position,
+                child: child,
+              );
+            },
+          ),
         ),
         GoRoute(
           path: SettingsScreen.routeUrl,
           name: SettingsScreen.routeName,
-          builder: (context, state) => const SettingsScreen(),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const SettingsScreen(),
+            transitionDuration: const Duration(
+              milliseconds: 250,
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              final position = Tween(
+                begin: const Offset(1, 0),
+                end: Offset.zero,
+              ).animate(animation);
+
+              return SlideTransition(
+                position: position,
+                child: child,
+              );
+            },
+          ),
         ),
       ],
     );

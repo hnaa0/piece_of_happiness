@@ -26,8 +26,24 @@ class AuthBottomAppBar extends StatelessWidget {
             if (type == ScreenType.signIn) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const SignUpScreen(),
+                PageRouteBuilder(
+                  transitionDuration: const Duration(
+                    milliseconds: 350,
+                  ),
+                  reverseTransitionDuration: const Duration(
+                    milliseconds: 350,
+                  ),
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    final position = Tween(
+                      begin: const Offset(0, 1),
+                      end: Offset.zero,
+                    ).animate(animation);
+
+                    return SlideTransition(
+                      position: position,
+                      child: const SignUpScreen(),
+                    );
+                  },
                 ),
               );
             } else {
