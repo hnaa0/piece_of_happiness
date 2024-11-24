@@ -72,6 +72,15 @@ class PieceRepo {
     for (var piece in pieces.docs) {
       await piece.reference.delete();
     }
+
+    final folderRef = _storage.ref().child("images/$uid");
+    final folderList = await folderRef.listAll();
+
+    if (folderList.items.isNotEmpty) {
+      for (var image in folderList.items) {
+        await image.delete();
+      }
+    }
   }
 }
 
