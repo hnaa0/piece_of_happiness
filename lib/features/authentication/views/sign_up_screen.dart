@@ -181,6 +181,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                         "이름",
                                         style: TextStyle(
                                           fontSize: 12,
+                                          color: Color(
+                                            ThemeColors.grey_800,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -199,6 +202,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                         "이메일",
                                         style: TextStyle(
                                           fontSize: 12,
+                                          color: Color(
+                                            ThemeColors.grey_800,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -217,6 +223,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                         "비밀번호",
                                         style: TextStyle(
                                           fontSize: 12,
+                                          color: Color(
+                                            ThemeColors.grey_800,
+                                          ),
                                         ),
                                       ),
                                     ),

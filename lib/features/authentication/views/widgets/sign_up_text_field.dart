@@ -35,8 +35,14 @@ class SignUpTextField extends StatelessWidget {
     return TextFormField(
       maxLength: type == FieldType.name ? 15 : null,
       controller: controller,
+      cursorColor: const Color(
+        ThemeColors.blue,
+      ),
       obscureText: type == FieldType.password ? true : false,
       autocorrect: false,
+      style: const TextStyle(
+        fontSize: 14,
+      ),
       decoration: InputDecoration(
         isDense: true,
         filled: true,
@@ -44,8 +50,14 @@ class SignUpTextField extends StatelessWidget {
           ThemeColors.white,
         ),
         contentPadding: const EdgeInsets.symmetric(
-          vertical: 14,
+          vertical: 15.5,
           horizontal: 20,
+        ),
+        helperStyle: const TextStyle(
+          fontSize: 10,
+          color: Color(
+            ThemeColors.grey_600,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
@@ -71,7 +83,9 @@ class SignUpTextField extends StatelessWidget {
             controller.clear();
           },
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.only(
+              right: 18,
+            ),
             child: SvgPicture.asset(
               "assets/icons/circle-xmark.svg",
               colorFilter: const ColorFilter.mode(
@@ -82,6 +96,9 @@ class SignUpTextField extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        suffixIconConstraints: const BoxConstraints(
+          maxWidth: 40,
         ),
       ),
       validator: (value) {

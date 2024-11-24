@@ -26,8 +26,14 @@ class SignInTextField extends StatelessWidget {
 
     return TextFormField(
       controller: controller,
+      cursorColor: const Color(
+        ThemeColors.blue,
+      ),
       obscureText: type == FieldType.password ? true : false,
       autocorrect: false,
+      style: const TextStyle(
+        fontSize: 14,
+      ),
       decoration: InputDecoration(
         isDense: true,
         filled: true,
@@ -35,7 +41,7 @@ class SignInTextField extends StatelessWidget {
           ThemeColors.white,
         ),
         contentPadding: const EdgeInsets.symmetric(
-          vertical: 14,
+          vertical: 15.5,
           horizontal: 20,
         ),
         enabledBorder: OutlineInputBorder(
@@ -62,7 +68,9 @@ class SignInTextField extends StatelessWidget {
             controller.clear();
           },
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.only(
+              right: 18,
+            ),
             child: SvgPicture.asset(
               "assets/icons/circle-xmark.svg",
               colorFilter: const ColorFilter.mode(
@@ -73,6 +81,9 @@ class SignInTextField extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        suffixIconConstraints: const BoxConstraints(
+          maxWidth: 40,
         ),
       ),
       validator: (value) {
