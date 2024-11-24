@@ -62,6 +62,17 @@ class PieceRepo {
       await _storage.ref().child(path).delete();
     }
   }
+
+  Future<void> deleteAllPieces(String uid) async {
+    final pieces = await _firestore
+        .collection("pieces")
+        .where("uid", isEqualTo: uid)
+        .get();
+
+    for (var piece in pieces.docs) {
+      await piece.reference.delete();
+    }
+  }
 }
 
 final pieceRepo = Provider(

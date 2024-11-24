@@ -26,6 +26,17 @@ class FetchPieceViewModel extends StreamNotifier<List<PieceModel>> {
   Future<void> deletePiece(String id, String imagePath) async {
     await _pieceRepo.deletePiece(id, imagePath, _authRepo.user!.uid);
   }
+
+  Future<void> deleteAllPieces() async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(
+      () async {
+        final user = _authRepo.user;
+        await _pieceRepo.deleteAllPieces(user!.uid);
+        return [];
+      },
+    );
+  }
 }
 
 final fetchPieceProvider =
