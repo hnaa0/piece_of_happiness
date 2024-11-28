@@ -1,16 +1,19 @@
-# piece_of_happiness
+# 행복조각
+행복조각은 일상 속의 소중하고 행복한 순간을 기록하기 위한 미니 다이어리 컨셉의 앱입니다.
+저장된 여러 조각 중 하나를 선물처럼 뽑아볼 수 있습니다.
 
-A new Flutter project.
+## 소개
+(24.11.28 업데이트)
 
-## Getting Started
+![image](https://github.com/user-attachments/assets/1d6c8947-a789-4b4f-89e0-cd8f94cc509e)
 
-This project is a starting point for a Flutter application.
+![image](https://github.com/user-attachments/assets/d402ae7a-c0bb-45ae-9d63-e9070b704603)
 
-A few resources to get you started if this is your first Flutter project:
+![image](https://github.com/user-attachments/assets/c6e42260-e3aa-4386-a9fe-c15102d62c2a)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![image](https://github.com/user-attachments/assets/df7a9087-2674-4f61-bc23-b2eb38c49a70)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![image](https://github.com/user-attachments/assets/43730056-ef77-4b2c-91cc-bc7faf8b78d3)
+
+![image](https://github.com/user-attachments/assets/0b58a2b9-76de-4b3b-a840-8e42be24f1f0)
+
